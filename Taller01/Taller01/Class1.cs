@@ -70,37 +70,47 @@ namespace Taller01
             set => _second = value;
         }
 
-        internal object Add(Time t3)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal bool IsOtherDay(Time t4)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal object ToMilliseconds()
+     
+        internal int ToMilliseconds()
         {
             return (_hour * 3600000) + (_minute * 60000) + (_second * 1000) + _millisecond;
         }
 
-        internal object ToMinutes()
+        internal int ToMinutes()
         {
-            return _hour * 60 + _minute + _second / 60.0 + _millisecond / 60000.0;
+            return _hour * 60 + _minute + _second / 60 + _millisecond / 60000;
         }
 
-        internal object ToSeconds()
+        internal int ToSeconds()
         {
             return (_hour * 3600) + (_minute * 60) + _second;
         }
 
+        internal Time Add(Time t3)
+        {
+            int totalMilliseconds = this.ToMilliseconds() + t3.ToMilliseconds();
+
+            int newHour = (totalMilliseconds / 3600000) % 24;
+            int newMinute = (totalMilliseconds % 3600000) / 60000;
+            int newSecond = (totalMilliseconds % 60000) / 1000;
+            int newMillisecond = totalMilliseconds % 1000;
+
+            return new Time(newHour, newMinute, newSecond, newMillisecond);
+        }
+
+        internal bool IsOtherDay(Time t4)
+        {
+            return this._hour > t4._hour;
+        }
+
+
+
         public override string ToString()
         {
             string ampm = _hour < 12 ? "AM" : "PM";
-            int hour = _hour % 12 == 0 ? 12 : _hour % 12; 
+            int hour12 = _hour % 12 == 0 ? 12 : _hour % 12; 
 
-            return $"{_hour:00}:{_minute:00}:{_second:00}.{_millisecond:000} {ampm}";
+            return $"{hour12:00}:{_minute:00}:{_second:00}.{_millisecond:000} {ampm}";
         }  
 
         private int ValidHour(int hour)
