@@ -13,10 +13,10 @@ try
     foreach (Time time in times)
     {
         Console.WriteLine($"Time: {time}");
-        Console.WriteLine($"\tMilliseconds: {time.ToMilliseconds(),15}");
-        Console.WriteLine($"\tSeconds     : {time.ToSeconds(),15}");
-        Console.WriteLine($"\tMinutes     : {time.ToMinutes(),15}");
-        Console.WriteLine($"\tAdd         : {time.Add(t3),15}");
+        Console.WriteLine($"\tMilliseconds: {time.ToMilliseconds(),15:n0}");
+        Console.WriteLine($"\tSeconds     : {time.ToSeconds(),15:n0}");
+        Console.WriteLine($"\tMinutes     : {time.ToMinutes(),15:n0}");
+        Console.WriteLine($"\tAdd         : {time.Add(t3),15:n0}");
         Console.WriteLine($"\tIs Other Day: {time.IsOtherDay(t4)}");
         Console.WriteLine();
     }
